@@ -1,0 +1,32 @@
+services:
+  database:
+    container_name: postgres
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: todo
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+  api:
+    container_name: api
+    build: ./aws-todo-back
+    command: sh -c "uvicorn main:app --reload --port=8000 --host=0.0.0.0"
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./aws-todo-back/.env
+    depends_on:
+      - database
+  web:
+    build: ./aws-todo-front
+    container_name: web
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+
+volumes:
+  db_data:

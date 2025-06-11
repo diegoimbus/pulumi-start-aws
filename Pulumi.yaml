@@ -1,0 +1,3 @@
+name: pulumi-ec2-web
+description: Servidor web en EC2 con Pulumi
+runtime: nodejs

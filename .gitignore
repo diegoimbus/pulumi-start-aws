@@ -1,0 +1,8 @@
+/bin/
+Pulumi.*.yaml
+!Pulumi.yaml
+.env
+node_modules
+__pycache__/
+venv/
+package-lock.json
